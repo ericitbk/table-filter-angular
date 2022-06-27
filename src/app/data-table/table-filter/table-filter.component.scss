@@ -1,0 +1,25 @@
+.table-filter-wrapper {
+  .top-action-row {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  mat-chip-list {
+    mat-chip {
+      margin-bottom: 20px;
+    }
+  }
+
+  .add-filter-button {
+    margin-bottom: 20px;
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
+}
+
+mat-option,
+mat-select {
+  text-transform: capitalize;
+}

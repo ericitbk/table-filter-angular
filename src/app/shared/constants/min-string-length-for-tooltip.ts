@@ -1,0 +1,1 @@
+export const MIN_STRING_LENGTH_FOR_TOOLTIP = 10;

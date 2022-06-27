@@ -1,0 +1,56 @@
+<div class="table-filter-wrapper">
+  <div class="top-action-row">
+    <h2>Filter table data</h2>
+    <button mat-icon-button (click)="closeSidebar()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <mat-chip-list class="applied-filters-wrapper">
+    <mat-chip *ngFor="let appliedFilter of appliedFilters" [removable]="true">
+      {{ appliedFilter?.field?.field | displayValue }} {{ appliedFilter?.operator }}
+      {{ appliedFilter?.value }}
+      <button matChipRemove (click)="onFilterRemoveClick(appliedFilter)">
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </mat-chip>
+  </mat-chip-list>
+  <form [formGroup]="tableFilterForm" #formDirective="ngForm">
+    <mat-form-field>
+      <mat-label>Field*</mat-label>
+      <mat-select formControlName="field">
+        <mat-option *ngFor="let dataField of dataFields" [value]="dataField">{{
+          dataField?.field | displayValue
+        }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="field.hasError('required')">field is required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Operator*</mat-label>
+      <mat-select formControlName="operator">
+        <mat-option
+          *ngFor="let operator of getOperatorsBasedOnFieldType(field?.value)"
+          [value]="operator"
+          >{{ operator }}</mat-option
+        >
+      </mat-select>
+      <mat-error *ngIf="operator.hasError('required')">operator is required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Value*</mat-label>
+      <input
+        [type]="field?.value?.type === 'number' ? 'number' : 'text'"
+        matInput
+        formControlName="value"
+      />
+      <mat-error *ngIf="value.hasError('required')">value is required</mat-error>
+    </mat-form-field>
+    <button
+      class="add-filter-button"
+      mat-stroked-button
+      [disabled]="tableFilterForm?.invalid"
+      (click)="onApplyFilterClick()"
+    >
+      Apply filter
+    </button>
+  </form>
+</div>

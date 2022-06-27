@@ -1,0 +1,39 @@
+.table-wrapper {
+  max-width: 100%;
+  overflow-x: auto;
+  height: calc(100vh - 160px);
+
+  table {
+    tr {
+      height: 70px;
+
+      &.mat-header-row {
+        height: 40px;
+      }
+
+      th {
+        text-transform: uppercase;
+      }
+
+      &:nth-of-type(odd) {
+        td {
+          background-color: rgba(0, 0, 0, 0.05);
+        }
+      }
+
+      td, th {
+        padding: 0 5px;
+        max-width: 200px;
+        overflow: hidden;
+        white-space: pre;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+}
+
+mat-sidenav {
+  width: 25vw;
+  padding: 20px;
+}
+
